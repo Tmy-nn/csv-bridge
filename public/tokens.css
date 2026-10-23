@@ -1,0 +1,97 @@
+/* ACLab / 西村知也 デザイントークン
+ * 正本: .company/creative/brand.md（色） / specs/_core.md（スケール）
+ * 使い方: 新規サイト・アプリは このファイルをコピーして先頭で読み込む。
+ * 【禁則】ここに無い数値をCSSに直接書かない。必要なら まずこのファイルに段を足す。
+ */
+:root {
+  /* ---- color: light ---- */
+  --ink:            #18213E;  /* 本文 15.84:1 on #fff */
+  --muted:          #5E667A;  /* 補足  5.74:1 */
+  --paper:          #F7F8FB;
+  --surface:        #FFFFFF;
+  --tint:           #F1EEFF;  /* ブランド淡面。文字は ink のみ */
+  --brand:          #5B4BD6;  /* 塗り。白文字 6.14:1 */
+  --brand-text:     #4B3CBC;  /* 文字・リンク 7.86:1 */
+  --brand-strong:   #3B2E96;  /* hover/押下 10.41:1 */
+  --accent-blue:    #245F92;  /* 補助 6.72:1。主役にしない */
+  --line:           #D9DCE6;  /* 装飾的な区切り線。比率要件なし */
+  --line-strong:    #7C8598;  /* 入力欄・部品の境界 3.71:1（3:1必須） */
+  --success:        #0F7A4A;
+  --warning:        #9A6300;
+  --danger:         #B3261E;
+  --focus:          #3B2E96;  /* フォーカス専用。brand を流用しない */
+  --on-brand:       #FFFFFF;
+
+  /* ---- type scale (specs/_core.md §1) ---- */
+  --fs--2: 12px; --fs--1: 14px; --fs-0: 16px; --fs-1: 20px;
+  --fs-2:  25px; --fs-3:  32px; --fs-4: 40px; --fs-5: 50px; --fs-6: 64px;
+  --fs-7:  80px; --fs-8: 100px;                  /* display専用 */
+  /* clampはこの4つだけ。CSS中に clamp() を直接書かない */
+  --fs-display: clamp(50px, 9vw, 100px);
+  --fs-h1:      clamp(40px, 6vw, 64px);
+  --fs-h2:      clamp(32px, 4vw, 50px);
+  --fs-h3:      clamp(25px, 2.6vw, 32px);
+
+  /* ---- font ---- */
+  --font-display: "Zen Kaku Gothic New", "Noto Sans JP", sans-serif; /* step4以上の見出しのみ */
+  --font-sans: "Inter", "Noto Sans JP", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --fw-regular: 400; --fw-medium: 500; --fw-bold: 700;
+
+  /* ---- line-height ---- */
+  --lh-body-ja: 1.8; --lh-body-en: 1.6; --lh-heading: 1.35; --lh-display: 1.15; --lh-tight: 1.5;
+
+  /* ---- spacing (4px base / 9段) ---- */
+  --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px; --s-5: 24px;
+  --s-6: 32px; --s-7: 48px; --s-8: 64px; --s-9: 96px;
+
+  /* ---- radius (3段) ---- */
+  --r-sm: 6px; --r-md: 12px; --r-lg: 20px; --r-pill: 999px; /* 1成果物で2値まで */
+
+  /* ---- elevation (2段のみ。既定は罫線) ---- */
+  --sh-sm: 0 1px 2px rgba(16,20,35,.06), 0 1px 3px rgba(16,20,35,.10);
+  --sh-lg: 0 12px 32px rgba(16,20,35,.14);
+
+  /* ---- layout ---- */
+  --container: min(1200px, 100vw - 48px);
+  --container-read: min(780px, 100vw - 48px);
+  --measure: 34em;
+  --header-h: 64px;
+
+  /* ---- chart (色覚多様性対応) ---- */
+  --c1:#0072B2; --c2:#B87A00; --c3:#009E73; --c4:#CC79A7; --c5:#D55E00; --c6:#4B3CBC;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ink: #E8EAF2; --muted: #A2A8BD; --paper: #12131A; --surface: #1B1D26;
+    --tint: #232238; --brand: #6C5CE0; --brand-text: #B3A6FF; --brand-strong: #C9BFFF;
+    --accent-blue: #7FB6E8; --line: #2A2D3A; --line-strong: #6E7688; --focus: #B3A6FF;
+    --success: #3FD99B; --warning: #F5B942; --danger: #FF8A80;
+    --c1:#56B4E9; --c2:#E69F00; --c3:#3FD99B; --c4:#F79AC0; --c5:#FF8A50; --c6:#B3A6FF;
+  }
+}
+:root[data-theme="dark"] {
+  --ink: #E8EAF2; --muted: #A2A8BD; --paper: #12131A; --surface: #1B1D26;
+  --tint: #232238; --brand: #6C5CE0; --brand-text: #B3A6FF; --brand-strong: #C9BFFF;
+  --accent-blue: #7FB6E8; --line: #2A2D3A; --line-strong: #6E7688; --focus: #B3A6FF;
+    --success: #3FD99B; --warning: #F5B942; --danger: #FF8A80;
+    --c1:#56B4E9; --c2:#E69F00; --c3:#3FD99B; --c4:#F79AC0; --c5:#FF8A50; --c6:#B3A6FF;
+}
+
+/* ---- base ---- */
+body {
+  background-color: var(--paper);      /* ショートハンド background を使わない */
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--fs-0);
+  line-height: var(--lh-body-ja);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;                    /* 和文にトラッキングを掛けない */
+}
+h1,h2 { font-family: var(--font-display); }
+h1,h2,h3 { line-height: var(--lh-heading); font-weight: var(--fw-bold); }
+.display { line-height: var(--lh-display); letter-spacing: -0.02em; } /* 欧文見出しのみ */
+p { max-width: var(--measure); }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { *,*::before,*::after { animation:none!important; transition:none!important; } }
